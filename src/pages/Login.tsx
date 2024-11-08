@@ -35,7 +35,7 @@ const Login: React.FC = () => {
     <div className="flex items-center justify-center min-h-[calc(100vh-80px)] bg-gray-100">
       <div className="w-full max-w-lg p-8 space-y-8 bg-white rounded-lg shadow-xl">
         <div className='p-2'>
-        <h2 className="text-3xl font-bold text-start text-blue-600">CONVERGENCE</h2>
+        <h2 className="text-3xl font-bold text-start text-blue-600">CONVERGENCE  </h2>
         <h2 className=" text-lg font-semibold text-start text-gray-700 mt-2">Sign In With Your Admin Account</h2>
         </div>
       
