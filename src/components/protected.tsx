@@ -22,18 +22,16 @@ export default function Protected() {
     const verifyUser = async () => {
       try {
         setLoading(true);
-        const { data } = await API.get(`/auth/verify`, {
+        const { data } = await API.post(`/validate-token`, {
           headers: {
             authorization: "authorization " + finalToken,
           },
         });
-        console.log("user--------------->",data.user)
         if (!data.success) {
           navigate("/login", { replace: true });
           setLoading(false);
           setIsAuth(false, null);
         }
-
         setIsAuth(true, data.user);
       } catch (error) {
         console.log("Axios Error: " + error);
