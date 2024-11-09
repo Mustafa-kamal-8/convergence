@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import logo from '../../public/assets/ASDM_Logo.png'
 import { setCookie } from '@/utils/api';
+import { useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginType, setLoginType] = useState('login');
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,7 +36,11 @@ const Login: React.FC = () => {
 
       if (data?.data?.token) {
         setCookie('Authorization', data?.data?.token, 7);
-      } else {
+      } 
+      if (data?.data?.isDept=== 1	){
+        navigate('/course')
+      }
+      else {
         throw new Error('Authentication token not received');
       }
 
