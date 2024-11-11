@@ -11,7 +11,7 @@ export default function Protected() {
   const [token] = useSearchParams();
   const cookie = Cookies.get("Authorization");
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const { setIsAuth, isAuth } = useAuth();
 
   // const token = import.meta.env.VITE_PUBLIC_SAMPLE_TOKEN;
@@ -21,7 +21,6 @@ export default function Protected() {
   useEffect(() => {
     const verifyUser = async () => {
       try {
-        setLoading(true);
         const { data } = await API.post(`/validate-token`, {
           headers: {
             authorization: "authorization " + finalToken,
@@ -29,7 +28,6 @@ export default function Protected() {
         });
         if (!data.success) {
           navigate("/login", { replace: true });
-          setLoading(false);
           setIsAuth(false, null);
         }
         setIsAuth(true, data.user);
@@ -38,7 +36,6 @@ export default function Protected() {
         navigate("/login", { replace: true });
         setIsAuth(false, null);
       } finally {
-        setLoading(false);
       }
     };
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import logo from '../../public/assets/ASDM_Logo.png'
 import { setCookie } from '@/utils/api';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -30,14 +31,15 @@ const Login: React.FC = () => {
 
       const data = await response.json();
 
-      if (!response.ok) {
+      if (response.ok) {
         throw new Error(data.message || 'An error occurred');
       }
 
       if (data?.data?.token) {
         setCookie('Authorization', data?.data?.token, 7);
-      } 
-      if (data?.data?.isDept=== 1	){
+      }
+      if (data?.data?.isDept === 1) {
+        toast.success("Login successfully!")
         navigate('/scheme')
         localStorage.setItem("fklDepartmentId", data?.data?.departmentId);
 
@@ -47,7 +49,7 @@ const Login: React.FC = () => {
       }
 
     } catch (err) {
-      console.error(err instanceof Error ? err.message : 'An error occurred');
+      toast.error(err instanceof Error ? err.message : 'An error occurred')
     } finally {
       setLoading(false);
     }
