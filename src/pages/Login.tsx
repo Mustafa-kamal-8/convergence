@@ -38,7 +38,7 @@ const Login: React.FC = () => {
         setCookie('Authorization', data?.data?.token, 7);
       } 
       if (data?.data?.isDept=== 1	){
-        navigate('/course')
+        navigate('/scheme')
       }
       else {
         throw new Error('Authentication token not received');

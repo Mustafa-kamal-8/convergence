@@ -21,7 +21,7 @@ export default function Header() {
     setTimeout(() => {
       cookie.remove("Authorization");
       setTimeout(() => {
-        navigate("/unauthorized");
+        navigate("/login");
       }, 1000);
     }, 500);
     setLoading(false);

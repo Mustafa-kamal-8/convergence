@@ -447,11 +447,11 @@ export const schemeTableColumns: ColumnDef<any, any>[] = [
     },
   },
   {
-    accessorKey: "schemeFundingType",
+    accessorKey: "vsSchemeType",
     header: "Scheme Funding Type",
   },
   {
-    accessorKey: "schemeFundingRatio",
+    accessorKey: "vsSchemeFUndingRatio",
     header: "Scheme Funding Ratio",
   },
   {
@@ -466,19 +466,19 @@ export const schemeTableColumns: ColumnDef<any, any>[] = [
     },
   },
   {
-    accessorKey: "schemeType",
+    accessorKey: "vsSchemeType",
     header: "Scheme Type",
   },
   {
-    accessorKey: "fundName",
+    accessorKey: "vsFundName",
     header: "Fund Name",
   },
   {
-    accessorKey: "scheme",
+    accessorKey: "vsSchemeName",
     header: "Scheme",
   },
   {
-    accessorKey: "schemeCode",
+    accessorKey: "vsSchemeCode",
     header: "Scheme Code",
   },
 ];

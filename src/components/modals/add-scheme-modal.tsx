@@ -50,6 +50,8 @@ export default function AddSchemeModal() {
     });
   };
 
+   const queryType = "scheme"
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -87,10 +89,12 @@ export default function AddSchemeModal() {
   const onFormSubmit = async (values: z.infer<typeof formSchema>) => {
     if (dataType === "new") {
       try {
-        const { data } = await API.post("/sheet/manual/scheme", { ...values });
+        const { data } = await API.post("/manual-file-upload", { ...values, queryType });
 
         if (data.success) {
           toast.success("Target Form Submitted Successfully");
+        }else{
+          toast.error(data.message)
         }
 
         handleClose();

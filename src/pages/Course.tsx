@@ -19,14 +19,17 @@ export default function Course() {
   const [loading, setLoading] = useState(false);
   const { key } = useModal();
 
+  const course = "Course"
+
   useMemo(() => {
     const abortController = new AbortController();
 
     const getData = async (signal: AbortSignal) => {
       try {
         setLoading(true);
-        const { data: resData } = await API.get("/sheet/get/course", {
+        const { data: resData } = await API.post("/get-department", {
           signal,
+          queryType: course
         });
 
         if (resData.success) {

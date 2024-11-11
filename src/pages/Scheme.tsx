@@ -16,13 +16,17 @@ export default function Scheme() {
   const [loading, setLoading] = useState(false);
   const { key } = useModal();
 
+  const queryType = "scheme"
+
   useMemo(() => {
     const abortController = new AbortController();
+
     const getData = async (signal: AbortSignal) => {
       try {
         setLoading(true);
-        const { data: resData } = await API.get("/sheet/get/scheme", {
+        const { data: resData } = await API.post("/get-department", {
           signal,
+          queryType: queryType
         });
 
         if (resData.success) {
@@ -31,10 +35,10 @@ export default function Scheme() {
       } catch (error) {
         if (isAxiosError(error)) {
           toast.error(
-            `Error while Submitting Form \n${error.response?.data.message}`
+            `Error while getting TP Data \n${error.response?.data.message}`
           );
         } else {
-          toast.error("Error in Getting Scheme Data");
+          toast.error("Error in getting TP Data ");
         }
       } finally {
         setLoading(false);
