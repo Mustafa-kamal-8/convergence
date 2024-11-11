@@ -6,14 +6,14 @@ import { API } from "@/utils/api";
 import { Label } from "./ui/label";
 
 interface StatesDataType {
-  states?: null | any[];
-  districts?: null | any[];
-  blocks?: null | any[];
+  vsState?: null | any[];
+  vsDistrict?: null | any[];
+  vsBlock?: null | any[];
 }
 interface FinalDataType {
-  state?: null | string;
-  district?: null | string;
-  block?: null | string;
+  vsState?: null | string;
+  vsDistrict?: null | string;
+  vsBlock?: null | string;
 }
 
 interface StateDistrictBlockProps {
@@ -24,15 +24,15 @@ export default function StateDistrictBlock({ form }: StateDistrictBlockProps) {
   const [loading, setLoading] = useState(false);
 
   const [statesData, setStatesData] = useState<StatesDataType>({
-    states: null,
-    districts: null,
-    blocks: null,
+    vsState: null,
+    vsDistrict: null,
+    vsBlock: null,
   });
 
   const [finalData, setFinalData] = useState<FinalDataType>({
-    state: "",
-    district: "",
-    block: "",
+    vsState: "",
+    vsDistrict: "",
+    vsBlock: "",
   });
 
   useMemo(() => {
@@ -43,7 +43,7 @@ export default function StateDistrictBlock({ form }: StateDistrictBlockProps) {
 
         if (resData.success) {
           setStatesData({
-            states: resData.data,
+            vsState: resData.data,
           });
         }
       } catch (error) {
@@ -61,17 +61,17 @@ export default function StateDistrictBlock({ form }: StateDistrictBlockProps) {
   }, []);
 
   useMemo(() => {
-    if (finalData.state && !finalData.district) {
+    if (finalData.vsState && !finalData.vsDistrict) {
       (async () => {
         try {
           setLoading(true);
 
           const { data: resData } = await API.get(
-            `/general/districts?stateId=${finalData.state}`
+            `/general/districts?stateId=${finalData.vsState}`
           );
 
           if (resData.success) {
-            setStatesData({ ...statesData, districts: resData.data });
+            setStatesData({ ...statesData, vsDistrict: resData.data });
           }
         } catch (error) {
           if (isAxiosError(error)) {
@@ -87,17 +87,17 @@ export default function StateDistrictBlock({ form }: StateDistrictBlockProps) {
       })();
     }
 
-    if (finalData.district && !finalData.block) {
+    if (finalData.vsDistrict && !finalData.vsBlock) {
       (async () => {
         try {
           setLoading(true);
 
           const { data: resData } = await API.get(
-            `/general/blocks?districtId=${finalData.district}`
+            `/general/blocks?districtId=${finalData.vsDistrict}`
           );
 
           if (resData.success) {
-            setStatesData({ ...statesData, blocks: resData.data });
+            setStatesData({ ...statesData, vsBlock: resData.data });
           }
         } catch (error) {
           if (isAxiosError(error)) {
@@ -113,7 +113,7 @@ export default function StateDistrictBlock({ form }: StateDistrictBlockProps) {
       })();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [finalData.state, finalData.district]);
+  }, [finalData.vsState, finalData.vsDistrict]);
 
   return (
     <>
@@ -122,15 +122,15 @@ export default function StateDistrictBlock({ form }: StateDistrictBlockProps) {
         <select
           name="state"
           id="state"
-          value={finalData.state || ""}
+          value={finalData.vsState || ""}
           onChange={(e) => {
             const selectedOption = e.target.options[e.target.selectedIndex];
             const selectedStateName =
               selectedOption.getAttribute("data-statename");
             setFinalData({
-              state: e.target.value,
-              district: null,
-              block: null,
+              vsState: e.target.value,
+              vsDistrict: null,
+              vsBlock: null,
             });
 
             form && form.setValue("state", selectedStateName);
@@ -139,14 +139,14 @@ export default function StateDistrictBlock({ form }: StateDistrictBlockProps) {
           disabled={loading}
         >
           <option value="">Select</option>
-          {statesData.states &&
-            statesData.states.map((state) => (
+          {statesData.vsState &&
+            statesData.vsState.map((vsState) => (
               <option
-                key={state.pklStateId}
-                value={state.pklStateId}
-                data-statename={state.vsStateName}
+                key={vsState.pklStateId}
+                value={vsState.pklStateId}
+                data-statename={vsState.vsStateName}
               >
-                {state.vsStateName}
+                {vsState.vsStateName}
               </option>
             ))}
         </select>
@@ -157,15 +157,15 @@ export default function StateDistrictBlock({ form }: StateDistrictBlockProps) {
         <select
           name="district"
           id="district"
-          value={finalData.district || ""}
+          value={finalData.vsDistrict || ""}
           onChange={(e) => {
             const selectedOption = e.target.options[e.target.selectedIndex];
             const selectedDistrictName =
               selectedOption.getAttribute("data-districtname");
             setFinalData({
               ...finalData,
-              district: e.target.value,
-              block: null,
+              vsDistrict: e.target.value,
+              vsBlock: null,
             });
             form && form.setValue("district", selectedDistrictName);
           }}
@@ -173,8 +173,8 @@ export default function StateDistrictBlock({ form }: StateDistrictBlockProps) {
           disabled={loading}
         >
           <option value="">Select</option>
-          {statesData.districts &&
-            statesData.districts.map((district) => (
+          {statesData.vsDistrict &&
+            statesData.vsDistrict.map((district) => (
               <option
                 key={district.pklDistrictId}
                 value={district.pklDistrictId}
@@ -191,13 +191,13 @@ export default function StateDistrictBlock({ form }: StateDistrictBlockProps) {
         <select
           name="block"
           id="block"
-          value={finalData.block || ""}
+          value={finalData.vsBlock || ""}
           onChange={(e) => {
             const selectedOption = e.target.options[e.target.selectedIndex];
             const selectedBlockName =
               selectedOption.getAttribute("data-blockname");
 
-            setFinalData({ ...finalData, block: e.target.value });
+            setFinalData({ ...finalData, vsBlock: e.target.value });
             form && form.setValue("block", selectedBlockName);
           }}
           className="w-full p-2 text-sm bg-white border rounded-md"
@@ -205,8 +205,8 @@ export default function StateDistrictBlock({ form }: StateDistrictBlockProps) {
         >
           <option value="">Select</option>
 
-          {statesData.blocks &&
-            statesData.blocks.map((block) => (
+          {statesData.vsBlock &&
+            statesData.vsBlock.map((block) => (
               <option
                 key={block.pklTalukaId}
                 value={block.pklTalukaId}

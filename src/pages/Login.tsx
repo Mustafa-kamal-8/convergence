@@ -39,6 +39,8 @@ const Login: React.FC = () => {
       } 
       if (data?.data?.isDept=== 1	){
         navigate('/scheme')
+        localStorage.setItem("fklDepartmentId", data?.data?.departmentId);
+
       }
       else {
         throw new Error('Authentication token not received');

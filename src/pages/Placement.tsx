@@ -19,14 +19,17 @@ export default function Assesment() {
   const [loading, setLoading] = useState(false);
   const { key } = useModal();
 
+  const placement = "placement"
+
   useMemo(() => {
     const abortController = new AbortController();
 
     const getData = async (signal: AbortSignal) => {
       try {
         setLoading(true);
-        const { data: resData } = await API.get("/sheet/get/placements", {
+        const { data: resData } = await API.post("/get-department", {
           signal,
+          queryType: placement
         });
 
         if (resData.success) {

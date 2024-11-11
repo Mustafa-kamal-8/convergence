@@ -25,7 +25,7 @@ const formSchema = z.object({
   schemeFundingRatio: z.string().optional(),
   sanctionOrderNo: z.string().optional(),
   dateOfSanction: z.string().optional(),
-  schemaType: z.string().optional(),
+  schemeType: z.string().optional(),
   fundName: z.string().optional(),
   scheme: z.string().optional(),
   schemeCode: z.string().optional(),
@@ -33,6 +33,8 @@ const formSchema = z.object({
 
 export default function AddSchemeModal() {
   const { isOpen, onClose, type, setKey, data, dataType } = useModal();
+
+  const fklDepartmentId = localStorage.getItem("fklDepartmentId")
 
   const isModalOpen = isOpen && type === "addScheme";
 
@@ -43,7 +45,7 @@ export default function AddSchemeModal() {
       schemeFundingRatio: "",
       sanctionOrderNo: "",
       dateOfSanction: "",
-      schemaType: "",
+      schemeType: "",
       fundName: "",
       scheme: "",
       schemeCode: "",
@@ -59,7 +61,7 @@ export default function AddSchemeModal() {
       schemeFundingRatio: "",
       sanctionOrderNo: "",
       dateOfSanction: "",
-      schemaType: "",
+      schemeType: "",
       fundName: "",
       scheme: "",
       schemeCode: "",
@@ -77,7 +79,7 @@ export default function AddSchemeModal() {
         schemeFundingRatio: data.schemeFundingRatio,
         sanctionOrderNo: data.sanctionOrderNo,
         dateOfSanction: formattedDate(data.dateOfSanction),
-        schemaType: data.schemeType,
+        schemeType: data.schemeType,
         fundName: data.fundName,
         scheme: data.scheme,
         schemeCode: data.schemeCode,
@@ -89,7 +91,7 @@ export default function AddSchemeModal() {
   const onFormSubmit = async (values: z.infer<typeof formSchema>) => {
     if (dataType === "new") {
       try {
-        const { data } = await API.post("/manual-file-upload", { ...values, queryType });
+        const { data } = await API.post("/manual-file-upload", { ...values, queryType , fklDepartmentId });
 
         if (data.success) {
           toast.success("Target Form Submitted Successfully");
@@ -250,7 +252,7 @@ export default function AddSchemeModal() {
               <div className="flex items-center gap-4">
                 <FormField
                   control={form.control}
-                  name="schemaType"
+                  name="schemeType"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>

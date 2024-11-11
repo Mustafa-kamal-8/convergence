@@ -18,13 +18,19 @@ export default function TP() {
   const [loading, setLoading] = useState(false);
   const { key } = useModal();
 
+  
+  const tp = "TP"
+
   useMemo(() => {
     const abortController = new AbortController();
 
     const getData = async (signal: AbortSignal) => {
       try {
         setLoading(true);
-        const { data: resData } = await API.get("/sheet/get/tp", { signal });
+        const { data: resData } = await API.post("/get-department", {
+          signal,
+          queryType: tp
+        });
 
         if (resData.success) {
           setTpData(resData.data);

@@ -16,13 +16,16 @@ export default function Trainer() {
   const [loading, setLoading] = useState(false);
   const { key } = useModal();
 
+  const trainer = "trainer"
+
   useMemo(() => {
     const abortController = new AbortController();
     const getData = async (signal: AbortSignal) => {
       try {
         setLoading(true);
-        const { data: resData } = await API.get("/sheet/get/trainer", {
+        const { data: resData } = await API.post("/get-department", {
           signal,
+          queryType: trainer
         });
 
         if (resData.success) {

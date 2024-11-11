@@ -19,7 +19,7 @@ export default function Course() {
   const [loading, setLoading] = useState(false);
   const { key } = useModal();
 
-  const course = "Course"
+  const course = "course"
 
   useMemo(() => {
     const abortController = new AbortController();
