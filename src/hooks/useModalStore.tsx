@@ -15,6 +15,7 @@ export type ModalType =
   | "addInvoice"
   | "uploadSheet"
   | "uploadScheme"
+  | "departmentLoginCreation"
   | "uploadBatch";
 
 export type SheetType =

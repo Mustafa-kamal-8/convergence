@@ -31,7 +31,7 @@ const Login: React.FC = () => {
 
       const data = await response.json();
 
-      if (response.ok) {
+      if (!response.ok) {
         throw new Error(data.message || 'An error occurred');
       }
 
@@ -41,6 +41,9 @@ const Login: React.FC = () => {
       if (data?.data?.isDept === 1) {
         toast.success("Login successfully!")
         navigate('/scheme')
+      } else if (data?.data?.isDept === 0) {
+        toast.success("Login successfully!")
+        navigate('/admin');
       }
       else {
         throw new Error('Authentication token not received');
@@ -119,7 +122,7 @@ const Login: React.FC = () => {
               disabled={ loading }
               className="w-full px-4 py-3 text-lg font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-400"
             >
-              { loading ? 'Please wait...' : (loginType === 'create' ? 'Create Account' : 'Sign In') }
+              { loading ? 'Please wait...' : 'Sign In' }
             </button>
           </form>
         </div>

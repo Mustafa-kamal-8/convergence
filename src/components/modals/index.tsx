@@ -2,6 +2,7 @@ import AddAssesmentModal from "./add-assesment-modal";
 import AddAssessorModal from "./add-assessor-modal";
 import AddBatchModal from "./add-batch-modal";
 import AddCourseModal from "./add-course-modal";
+import AddDepartmentLoginModal from "./add-department-login";
 import AddInvoiceModal from "./add-invoice-modal";
 import AddPlacementModal from "./add-placement-modal";
 import AddProfileModal from "./add-profile-modal";
@@ -28,6 +29,9 @@ export default function Modals() {
       <AddAssessorModal />
       <AddTrainerModal />
       <AddInvoiceModal />
+
+      {/* admin */ }
+      <AddDepartmentLoginModal />
 
       <FileUploadAndPreviewModal />
     </>

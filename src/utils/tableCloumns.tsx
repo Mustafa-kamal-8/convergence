@@ -134,6 +134,50 @@ export const tcTableColumns: ColumnDef<any, any>[] = [
   },
 ];
 
+export const adminTableColumns: ColumnDef<any, any>[] = [
+  {
+    accessorKey: "id",
+    header: "SL. No",
+    cell: ({ row }) => {
+      return row.index + 1;
+    },
+  },
+  // {
+  //   accessorKey: "dateValidFrom",
+  //   header: "Date Valid From",
+  //   cell: ({ getValue }) => {
+  //     return moment(getValue()).local().format("D/MM/YYYY");
+  //   },
+  // },
+  // {
+  //   accessorKey: "pklDepartmentId",
+  //   header: "Department Id",
+  // },
+  {
+    accessorKey: "departmentName",
+    header: "Department Name",
+  },
+  {
+    accessorKey: "userName",
+    header: "Department Username",
+  },
+  {
+    accessorKey: "phoneNumber",
+    header: "Phone Number",
+  },
+  {
+    accessorKey: "adminName",
+    header: "Created By",
+  },
+  {
+    accessorKey: "createdDate",
+    header: "Created Date",
+    cell: ({ getValue }) => {
+      return moment(getValue()).local().format("D/MM/YYYY");
+    },
+  },
+]
+
 export const courseTableColumns: ColumnDef<any, any>[] = [
   {
     accessorKey: "id",
@@ -559,7 +603,7 @@ export const assessorTableColumns: ColumnDef<any, any>[] = [
     accessorKey: "assessorEmail",
     header: "Assessor Email",
     cell: ({ getValue }) => {
-      return <span className="normal-case">{getValue()}</span>;
+      return <span className="normal-case">{ getValue() }</span>;
     },
   },
   {
