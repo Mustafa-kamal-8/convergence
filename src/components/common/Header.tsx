@@ -18,6 +18,9 @@ export default function Header() {
   const location = useLocation();
   const currentRoute = location?.pathname;
 
+  console.log(user);
+
+
   const handleLogout = () => {
     setLoading(true);
     setTimeout(() => {
@@ -43,8 +46,10 @@ export default function Header() {
             className="rounded-md border p-2 cursor-pointer"
           >
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-red-500 rounded-full cursor-pointer"></div>
-              <h1>{ user?.vsEntityName }</h1>
+              <div className="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center text-white font-bold">
+                { user ? user.charAt(0).toUpperCase() : "" }
+              </div>
+              <h1 className="capitalize">{ user }</h1>
             </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">

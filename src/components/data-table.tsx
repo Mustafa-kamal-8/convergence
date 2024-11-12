@@ -24,6 +24,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuCheckboxItem,
+  DropdownMenuItem,
 } from "./ui/dropdown-menu";
 import {
   ChevronDown,
@@ -45,6 +46,11 @@ interface DataTableProps {
   edit?: boolean;
   toggle?: boolean;
   onToggleChange?: (departmentId: number | string, status: number) => void;
+  columnFilter?: boolean;
+  searchDropdown?: boolean;
+  dropdownData?: string[];
+  onDropdownSelection?: (selectedValue: string) => void;
+  selectedFilter?: string;
 }
 
 export default function DataTable({
@@ -54,7 +60,12 @@ export default function DataTable({
   edit,
   editModalName,
   toggle,
-  onToggleChange
+  onToggleChange,
+  columnFilter = true,
+  dropdownData,
+  searchDropdown,
+  onDropdownSelection,
+  selectedFilter
 }: DataTableProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -99,41 +110,85 @@ export default function DataTable({
     onToggleChange?.(departmentId, status);
   };
 
+  const handleSelectItem = (item: string) => {
+    onDropdownSelection?.(item);
+  };
+
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter by any value..."
-          value={ filtering }
-          onChange={ (event) => setFiltering(event.target.value) }
-          className="max-w-sm"
-        />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns <ChevronDown className="w-4 h-4 ml-2" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            { table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={ column.id }
-                    className="capitalize"
-                    checked={ column.getIsVisible() }
-                    onCheckedChange={ (value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    { column.id }
-                  </DropdownMenuCheckboxItem>
-                );
-              }) }
-          </DropdownMenuContent>
-        </DropdownMenu>
+      <div className="flex py-4">
+        { !searchDropdown ?
+          <Input
+            placeholder="Filter by any value..."
+            value={ filtering }
+            onChange={ (event) => setFiltering(event.target.value) }
+            className="max-w-sm"
+          />
+          :
+          (
+            <div className="flex gap-4">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" className="ml-auto">
+                    { selectedFilter ? selectedFilter : "Select Filter Type" }
+                    <ChevronDown className="w-4 h-4 ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  {
+                    dropdownData
+                      ?.filter((dropdownItem) =>
+                        dropdownItem.toLowerCase().includes(filtering.toLowerCase())
+                      ).map((dropdownItem, index) => (
+                        <DropdownMenuItem
+                          key={ index }
+                          onClick={ () => handleSelectItem(dropdownItem) }
+                          className={ selectedFilter === dropdownItem ? 'selected' : '' }
+                        >
+                          { dropdownItem }
+                        </DropdownMenuItem>
+                      ))
+                  }
+                </DropdownMenuContent>
+              </DropdownMenu>
+              { selectedFilter !== "" &&
+                <Input
+                  placeholder={ `Filter by ${selectedFilter || "column"}` }
+                  value={ filtering }
+                  onChange={ (event) => setFiltering(event.target.value) }
+                  className="w-60 mb-2"
+                />
+              }
+            </div>
+          ) }
+        { columnFilter &&
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="ml-auto">
+                Columns <ChevronDown className="w-4 h-4 ml-2" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              { table
+                .getAllColumns()
+                .filter((column) => column.getCanHide())
+                .map((column) => {
+                  return (
+                    <DropdownMenuCheckboxItem
+                      key={ column.id }
+                      className="capitalize"
+                      checked={ column.getIsVisible() }
+                      onCheckedChange={ (value) =>
+                        column.toggleVisibility(!!value)
+                      }
+                    >
+                      { column.id }
+                    </DropdownMenuCheckboxItem>
+                  );
+                }) }
+            </DropdownMenuContent>
+          </DropdownMenu>
+        }
       </div>
       <div className="border rounded-md">
         <Table>
@@ -144,7 +199,7 @@ export default function DataTable({
                   return (
                     <TableHead
                       key={ header.id }
-                      className="text-nowrap max-h-14 whitespace-nowrap"
+                      className="text-nowrap max-h-14 whitespace-nowrap text-black font-bold"
                     >
                       { header.isPlaceholder
                         ? null
@@ -289,4 +344,5 @@ export default function DataTable({
       </div>
     </div>
   );
+
 }

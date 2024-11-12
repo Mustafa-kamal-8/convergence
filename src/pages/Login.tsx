@@ -40,7 +40,7 @@ const Login: React.FC = () => {
 
       if (data?.data?.token) {
         setCookie('Authorization', data?.data?.token, 7);
-        setIsAuth(true, data?.data?.user);
+        setIsAuth(true, data?.data?.adminName);
       }
       if (data?.data?.isDept === 1) {
         toast.success("Login successfully!")

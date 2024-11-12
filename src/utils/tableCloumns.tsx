@@ -164,6 +164,10 @@ export const adminTableColumns: ColumnDef<any, any>[] = [
   {
     accessorKey: "phoneNumber",
     header: "Phone Number",
+    cell: ({ getValue }) => {
+      const value = getValue();
+      return value ? value : "No Available";
+    }
   },
   {
     accessorKey: "adminName",

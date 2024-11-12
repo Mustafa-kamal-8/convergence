@@ -17,7 +17,14 @@ import { BACKEND_URL } from "@/lib/utils";
 export default function LoginCreation() {
   const [courseData, setCourseData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedDepartment, setSelectedDepartment] = useState("");
   const { key, setKey } = useModal();
+
+  const departments = ["Department Name", "Department Username"];
+
+  const handleDepartmentSelection = (item: string) => {
+    setSelectedDepartment(item);
+  }
 
   const handleToggleChange = async (departmentId: string | number, status: number) => {
     try {
@@ -97,6 +104,11 @@ export default function LoginCreation() {
             columns={ adminTableColumns }
             data={ courseData }
             toggle
+            columnFilter={ false }
+            dropdownData={ departments }
+            searchDropdown
+            selectedFilter={ selectedDepartment }
+            onDropdownSelection={ handleDepartmentSelection }
             onToggleChange={ handleToggleChange }
           />
         ) }
