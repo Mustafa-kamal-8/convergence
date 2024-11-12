@@ -18,9 +18,6 @@ export default function Header() {
   const location = useLocation();
   const currentRoute = location?.pathname;
 
-  console.log(user);
-
-
   const handleLogout = () => {
     setLoading(true);
     setTimeout(() => {

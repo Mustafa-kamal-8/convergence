@@ -137,9 +137,7 @@ export default function DataTable({
                 <DropdownMenuContent>
                   {
                     dropdownData
-                      ?.filter((dropdownItem) =>
-                        dropdownItem.toLowerCase().includes(filtering.toLowerCase())
-                      ).map((dropdownItem, index) => (
+                      ?.map((dropdownItem, index) => (
                         <DropdownMenuItem
                           key={ index }
                           onClick={ () => handleSelectItem(dropdownItem) }
