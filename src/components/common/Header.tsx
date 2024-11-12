@@ -8,13 +8,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import cookie from "js-cookie";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 
 export default function Header() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuth();
+  const location = useLocation();
+  const currentRoute = location?.pathname;
 
   const handleLogout = () => {
     setLoading(true);
@@ -28,7 +30,7 @@ export default function Header() {
   };
 
   return (
-    <div className="sticky top-0 z-5 flex items-center justify-between p-4 bg-white border-b">
+    <div className="sticky top-0 z-10 flex items-center justify-between p-4 bg-white border-b">
       <h1> Assam Skill Development Mission</h1>
 
       <div>
@@ -38,18 +40,20 @@ export default function Header() {
             className="rounded-md border p-2 cursor-pointer"
           >
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-red-500 rounded-full cursor-pointer"></div>
-              <h1>{user?.vsEntityName}</h1>
+              <div className="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center text-white font-bold">
+                { user ? user.charAt(0).toUpperCase() : "" }
+              </div>
+              <h1 className="capitalize">{ user }</h1>
             </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
-            <DropdownMenuItem onClick={handleLogout}>
+            <DropdownMenuItem onClick={ handleLogout }>
               <LogOut className="w-4 h-4 mr-2" />
               <span>
-                Log out{" "}
-                {loading ? (
+                Log out{ " " }
+                { loading ? (
                   <LoaderIcon className="h-4 w-4 animate-spin" />
-                ) : null}
+                ) : null }
               </span>
             </DropdownMenuItem>
           </DropdownMenuContent>

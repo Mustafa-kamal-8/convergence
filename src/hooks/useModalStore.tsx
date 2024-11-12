@@ -47,7 +47,7 @@ interface ModalStore {
   ) => void;
   onClose: () => void;
   key: number;
-  setKey: (num: number) => void;
+  setKey: () => void;
   sheetType?: SheetType;
 }
 
@@ -68,7 +68,7 @@ export const useModal = create<ModalStore>((set) => ({
       sheetType: "null",
     }),
   key: 0,
-  setKey: (num: number) => {
-    set({ key: num });
+  setKey: () => {
+    set((state) => ({ key: state.key + 1 }));
   },
 }));

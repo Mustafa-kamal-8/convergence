@@ -73,9 +73,6 @@ export default function AddDepartmentLoginModal() {
 
             handleClose();
 
-            setTimeout(() => {
-                setKey(Math.random());
-            }, 500);
         } catch (error) {
             if (isAxiosError(error)) {
                 toast.error(
@@ -115,20 +112,20 @@ export default function AddDepartmentLoginModal() {
 
     return (
         <Dialog open={ isModalOpen } onOpenChange={ handleClose }>
-            <DialogContent className="p-0 overflow-hidden text-black bg-white w-[60vw]">
+            <DialogContent className="p-0 overflow-hidden text-black bg-white w-[80vw]">
                 <DialogHeader className="px-6 pt-8">
                     <DialogTitle className="text-2xl font-bold text-center">
                         Department Login Creation
                     </DialogTitle>
                 </DialogHeader>
 
-                <div className="overflow-y-scroll max-h-[40rem]">
+                <div className="overflow-y-scroll max-h-[50rem]">
                     <Form { ...form }>
                         <form
                             onSubmit={ form.handleSubmit(onFormSubmit) }
                             className="flex flex-col w-full gap-4 p-8"
                         >
-                            <div className="flex items-center gap-4">
+                            <div className="flex justify-center items-center gap-4">
                                 <FormField
                                     control={ form.control }
                                     name="departmentName"
@@ -139,6 +136,7 @@ export default function AddDepartmentLoginModal() {
                                                     <Label htmlFor="departmentName">Department Name</Label>
                                                     <Input
                                                         id="departmentName"
+                                                        className="w-64"
                                                         placeholder="Department Name"
                                                         { ...field }
                                                     />
@@ -159,6 +157,7 @@ export default function AddDepartmentLoginModal() {
                                                     <Label htmlFor="loginName">Username</Label>
                                                     <Input
                                                         id="loginName"
+                                                        className="w-64"
                                                         placeholder="Department Username"
                                                         { ...field }
                                                     />
@@ -170,7 +169,7 @@ export default function AddDepartmentLoginModal() {
                                 />
                             </div>
 
-                            <div className="flex items-center gap-4">
+                            <div className="flex justify-center items-center gap-4 pb-5">
                                 <FormField
                                     control={ form.control }
                                     name="phoneNumber"
@@ -184,6 +183,7 @@ export default function AddDepartmentLoginModal() {
                                                     <Input
                                                         id="phoneNumber"
                                                         type="tel"
+                                                        className="w-64"
                                                         inputMode="numeric"
                                                         maxLength={ 10 }
                                                         placeholder="Department Phone Number"
@@ -207,6 +207,7 @@ export default function AddDepartmentLoginModal() {
                                                     <Input
                                                         id="password"
                                                         type="password"
+                                                        className="w-64"
                                                         placeholder="Enter Department Password"
                                                         { ...field }
                                                     />

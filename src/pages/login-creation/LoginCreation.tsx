@@ -17,7 +17,14 @@ import { BACKEND_URL } from "@/lib/utils";
 export default function LoginCreation() {
   const [courseData, setCourseData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const { key } = useModal();
+  const [selectedDepartment, setSelectedDepartment] = useState("");
+  const { key, setKey } = useModal();
+
+  const departments = ["Department Name", "Department Username"];
+
+  const handleDepartmentSelection = (item: string) => {
+    setSelectedDepartment(item);
+  }
 
   const handleToggleChange = async (departmentId: string | number, status: number) => {
     try {
@@ -25,6 +32,7 @@ export default function LoginCreation() {
 
       if (data.success) {
         toast.success("Profile Submitted Successfully");
+        setKey();
       }
     } catch (error) {
       if (isAxiosError(error)) {
@@ -69,6 +77,7 @@ export default function LoginCreation() {
 
   return (
     <div className="h-full m-4 space-y-4">
+      <h2 className="text-2xl font-bold text-center">Department Login Creation</h2>
       <div className="p-4 bg-white relative flex items-center justify-between">
         <AddButton
           modalType="departmentLoginCreation"
@@ -95,6 +104,11 @@ export default function LoginCreation() {
             columns={ adminTableColumns }
             data={ courseData }
             toggle
+            columnFilter={ false }
+            dropdownData={ departments }
+            searchDropdown
+            selectedFilter={ selectedDepartment }
+            onDropdownSelection={ handleDepartmentSelection }
             onToggleChange={ handleToggleChange }
           />
         ) }

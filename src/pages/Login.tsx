@@ -3,6 +3,7 @@ import logo from '../../public/assets/ASDM_Logo.png'
 import { setCookie } from '@/utils/api';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { useAuth } from '@/hooks/useAuth';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -10,7 +11,9 @@ const Login: React.FC = () => {
   const [loginType, setLoginType] = useState('login');
   const [loading, setLoading] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const { setIsAuth } = useAuth();
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,6 +40,7 @@ const Login: React.FC = () => {
 
       if (data?.data?.token) {
         setCookie('Authorization', data?.data?.token, 7);
+        setIsAuth(true, data.data.adminName);
       }
       localStorage.setItem("fklDepartmentId", data?.data?.departmentId);
       if (data?.data?.isDept === 1) {
