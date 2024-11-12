@@ -18,13 +18,18 @@ export default function TC() {
   const [loading, setLoading] = useState(false);
   const { key } = useModal();
 
+  const tc = "TC"
+
   useMemo(() => {
     const abortController = new AbortController();
 
     const getData = async (signal: AbortSignal) => {
       try {
         setLoading(true);
-        const { data: resData } = await API.get("/sheet/get/tc", { signal });
+        const { data: resData } = await API.post("/get-department", {
+          signal,
+          queryType: tc
+        });
 
         if (resData.success) {
           setTcData(resData.data);

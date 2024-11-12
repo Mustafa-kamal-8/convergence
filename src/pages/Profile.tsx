@@ -19,14 +19,17 @@ export default function Assesment() {
   const [loading, setLoading] = useState(false);
   const { key } = useModal();
 
+  const candidate = "candidate"
+
   useMemo(() => {
     const abortController = new AbortController();
 
     const getData = async (signal: AbortSignal) => {
       try {
         setLoading(true);
-        const { data: resData } = await API.get("/sheet/get/profiles", {
+        const { data: resData } = await API.post("/get-department", {
           signal,
+          queryType: candidate
         });
 
         if (resData.success) {

@@ -23,20 +23,23 @@ import { useEffect } from "react";
 
 const formSchema = z.object({
   tpId: z.string().optional(),
-  tpName: z.string().optional(),
-  tpSpocEmail: z.string().optional(),
-  tpSpocMobile: z.string().optional(),
-  state: z.string().optional(),
-  district: z.string().optional(),
-  block: z.string().optional(),
-  tpVillage: z.string().optional(),
-  tpSpocName: z.string().optional(),
-  tpSmartId: z.string().optional(),
-  tpAddress: z.string().optional(),
+  vsTpName: z.string().optional(),
+  vsSpocEmail: z.string().optional(),
+  iSpocContactNum: z.string().optional(),
+  vsState: z.string().optional(),
+  vsDistrict: z.string().optional(),
+  vsBlock: z.string().optional(),
+  vsVillage: z.string().optional(),
+  vsSpocName: z.string().optional(),
+  vsTpCode: z.string().optional(),
+  vsAddress: z.string().optional(),
 });
 
 export default function AddTpModal() {
   const { isOpen, onClose, type, setKey, data, dataType } = useModal();
+
+  const fklDepartmentId = localStorage.getItem("fklDepartmentId")
+   const queryType = "TP"
 
   const isModalOpen = isOpen && type === "addTp";
 
@@ -44,16 +47,16 @@ export default function AddTpModal() {
     onClose();
     form.reset({
       tpId: "",
-      tpName: "",
-      tpSpocEmail: "",
-      tpSpocMobile: "",
-      state: "",
-      district: "",
-      block: "",
-      tpVillage: "",
-      tpSpocName: "",
-      tpSmartId: "",
-      tpAddress: "",
+      vsTpName: "",
+      vsSpocEmail: "",
+      iSpocContactNum: "",
+      vsState: "",
+      vsDistrict: "",
+      vsBlock: "",
+      vsVillage: "",
+      vsSpocName: "",
+      vsTpCode: "",
+      vsAddress: "",
     });
   };
 
@@ -61,16 +64,16 @@ export default function AddTpModal() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       tpId: "",
-      tpName: "",
-      tpSpocEmail: "",
-      tpSpocMobile: "",
-      state: "",
-      district: "",
-      block: "",
-      tpVillage: "",
-      tpSpocName: "",
-      tpSmartId: "",
-      tpAddress: "",
+      vsTpName: "",
+      vsSpocEmail: "",
+      iSpocContactNum: "",
+      vsState: "",
+      vsDistrict: "",
+      vsBlock: "",
+      vsVillage: "",
+      vsSpocName: "",
+      vsTpCode: "",
+      vsAddress: "",
     },
   });
 
@@ -78,16 +81,16 @@ export default function AddTpModal() {
     if (data?.tpId && data?.tpName && type === "addTp") {
       form.reset({
         tpId: data.tpId,
-        tpName: data.tpName,
-        tpSpocEmail: data.tpSpocEmail || "",
-        tpSpocMobile: data.tpSpocMobile || "",
-        state: data.tpState || "",
-        district: data.tpDistrict || "",
-        block: data.tpBlock || "",
-        tpVillage: data.tpVillage || "",
-        tpSpocName: data.tpSpocName || "",
-        tpSmartId: data.tpSmartId || "",
-        tpAddress: data.tpAddress || "",
+        vsTpName: data.vsTpName,
+        vsSpocEmail: data.vsSpocEmail || "",
+        iSpocContactNum: data.iSpocContactNum || "",
+        vsState: data.vsState || "",
+        vsDistrict: data.vsDistrict || "",
+        vsBlock: data.vsBlock || "",
+        vsVillage: data.vsVillage || "",
+        vsSpocName: data.vsSpocName || "",
+        vsTpCode: data.vsTpCode || "",
+        vsAddress: data.vsAddress || "",
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -96,7 +99,7 @@ export default function AddTpModal() {
   const onFormSubmit = async (values: z.infer<typeof formSchema>) => {
     if (dataType === "new") {
       try {
-        const { data } = await API.post("/sheet/manual/tp", { ...values });
+        const { data } = await API.post("/manual-file-upload", { ...values,fklDepartmentId,queryType  });
 
         if (data.success) {
           toast.success("Tp Form Submitted Successfully");
@@ -174,7 +177,7 @@ export default function AddTpModal() {
 
                 <FormField
                   control={form.control}
-                  name="tpName"
+                  name="vsTpName"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormControl>
@@ -195,7 +198,7 @@ export default function AddTpModal() {
               <div className="flex items-center gap-4">
                 <FormField
                   control={form.control}
-                  name="tpSpocEmail"
+                  name="vsSpocEmail"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormControl>
@@ -215,7 +218,7 @@ export default function AddTpModal() {
 
                 <FormField
                   control={form.control}
-                  name="tpSpocMobile"
+                  name="iSpocContactNum"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormControl>
@@ -237,7 +240,7 @@ export default function AddTpModal() {
               <div className="flex items-center gap-4">
                 <FormField
                   control={form.control}
-                  name="tpSpocName"
+                  name="vsSpocName"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormControl>
@@ -257,7 +260,7 @@ export default function AddTpModal() {
 
                 <FormField
                   control={form.control}
-                  name="tpSmartId"
+                  name="vsTpCode"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormControl>
@@ -282,7 +285,7 @@ export default function AddTpModal() {
 
               <FormField
                 control={form.control}
-                name="tpVillage"
+                name="vsVillage"
                 render={({ field }) => (
                   <FormItem className="w-full">
                     <FormControl>
@@ -302,7 +305,7 @@ export default function AddTpModal() {
 
               <FormField
                 control={form.control}
-                name="tpAddress"
+                name="vsAddress"
                 render={({ field }) => (
                   <FormItem className="w-full">
                     <FormControl>

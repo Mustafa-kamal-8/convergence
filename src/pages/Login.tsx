@@ -44,6 +44,7 @@ const Login: React.FC = () => {
       } else if (data?.data?.isDept === 0) {
         toast.success("Login successfully!")
         navigate('/admin');
+        localStorage.setItem("fklDepartmentId", data?.data?.departmentId);
       }
       else {
         throw new Error('Authentication token not received');

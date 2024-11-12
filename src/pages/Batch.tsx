@@ -15,14 +15,15 @@ export default function Batch() {
   const [batchData, setBatchData] = useState([]);
   const [loading, setLoading] = useState(false);
   const { key } = useModal();
-
+const batch  = "batch"
   useMemo(() => {
     const abortController = new AbortController();
     const getData = async (signal: AbortSignal) => {
       try {
         setLoading(true);
-        const { data: resData } = await API.get("/sheet/get/batch", {
+        const { data: resData } = await API.post("/get-department", {
           signal,
+          queryType: batch
         });
 
         if (resData.success) {

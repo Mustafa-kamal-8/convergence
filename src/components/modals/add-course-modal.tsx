@@ -21,56 +21,59 @@ import { useEffect } from "react";
 import { formattedDate } from "@/lib/utils";
 
 const formSchema = z.object({
-  dateValidFrom: z.string().optional(),
-  dateValidUpto: z.string().optional(),
-  sectorName: z.string().optional(),
-  qpnosCode: z.string().optional(),
-  jobRoleName: z.string().optional(),
-  totalTheoryHours: z.string().optional(),
-  totalPraticalHours: z.string().optional(),
+  dtFromDate: z.string().optional(),
+  dtToDate: z.string().optional(),
+  vsCourseName: z.string().optional(),
+  vsCourseCode: z.string().optional(),
+  fklSectorId: z.string().optional(),
+  iTheoryDurationInHours: z.string().optional(),
+  iPracticalDurationInHours: z.string().optional(),
 });
 
 export default function AddCourseModal() {
   const { isOpen, onClose, type, setKey, data, dataType } = useModal();
+
+   const queryType = "course"
+   const fklDepartmentId = localStorage.getItem("fklDepartmentId")
 
   const isModalOpen = isOpen && type === "addCourse";
 
   const handleClose = () => {
     onClose();
     form.reset({
-      dateValidUpto: "",
-      dateValidFrom: "",
-      jobRoleName: "",
-      qpnosCode: "",
-      sectorName: "",
-      totalTheoryHours: "",
-      totalPraticalHours: "",
+      dtToDate: "",
+      dtFromDate: "",
+      vsCourseName: "",
+      vsCourseCode: "",
+      fklSectorId: "",
+      iTheoryDurationInHours: "",
+      iPracticalDurationInHours: "",
     });
   };
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      dateValidUpto: "",
-      dateValidFrom: "",
-      jobRoleName: "",
-      qpnosCode: "",
-      sectorName: "",
-      totalTheoryHours: "",
-      totalPraticalHours: "",
+      dtToDate: "",
+      dtFromDate: "",
+      vsCourseName: "",
+      vsCourseCode: "",
+      fklSectorId: "",
+      iTheoryDurationInHours: "",
+      iPracticalDurationInHours: "",
     },
   });
 
   useEffect(() => {
     if (data?.dateValidFrom && data?.dateValidUpto && type === "addCourse") {
       form.reset({
-        dateValidFrom: formattedDate(data.dateValidFrom),
-        dateValidUpto: formattedDate(data.dateValidUpto),
-        jobRoleName: data.jobRoleName,
-        qpnosCode: data.qpnosCode,
-        sectorName: data.sectorName,
-        totalTheoryHours: String(data.totalTheoryHours),
-        totalPraticalHours: String(data.totalPraticalHours),
+        dtFromDate: formattedDate(data.dateValidFrom),
+        dtToDate: formattedDate(data.dateValidUpto),
+        vsCourseName: data.jobRoleName,
+        vsCourseCode: data.qpnosCode,
+        fklSectorId: data.sectorName,
+        iTheoryDurationInHours: String(data.totalTheoryHours),
+        iPracticalDurationInHours: String(data.totalPraticalHours),
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -79,7 +82,7 @@ export default function AddCourseModal() {
   const onFormSubmit = async (values: z.infer<typeof formSchema>) => {
     if (dataType === "new") {
       try {
-        const { data } = await API.post("/sheet/manual/course", { ...values });
+        const { data } = await API.post("/manual-file-upload", { ...values,queryType, fklDepartmentId});
 
         if (data.success) {
           toast.success("Course Form Submitted Successfully");
@@ -141,7 +144,7 @@ export default function AddCourseModal() {
               <div className="flex flex-col items-center gap-4 sm:flex-row">
                 <FormField
                   control={form.control}
-                  name="dateValidFrom"
+                  name="dtFromDate"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormControl>
@@ -162,7 +165,7 @@ export default function AddCourseModal() {
 
                 <FormField
                   control={form.control}
-                  name="dateValidUpto"
+                  name="dtToDate"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormControl>
@@ -184,7 +187,7 @@ export default function AddCourseModal() {
 
               <FormField
                 control={form.control}
-                name="sectorName"
+                name="vsCourseName"
                 render={({ field }) => (
                   <FormItem className="w-full">
                     <FormControl>
@@ -204,7 +207,7 @@ export default function AddCourseModal() {
 
               <FormField
                 control={form.control}
-                name="qpnosCode"
+                name="vsCourseCode"
                 render={({ field }) => (
                   <FormItem className="w-full">
                     <FormControl>
@@ -224,7 +227,7 @@ export default function AddCourseModal() {
 
               <FormField
                 control={form.control}
-                name="jobRoleName"
+                name="fklSectorId"
                 render={({ field }) => (
                   <FormItem className="w-full">
                     <FormControl>
@@ -245,7 +248,7 @@ export default function AddCourseModal() {
               <div className="flex items-center gap-4">
                 <FormField
                   control={form.control}
-                  name="totalTheoryHours"
+                  name="iTheoryDurationInHours"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormControl>
@@ -267,7 +270,7 @@ export default function AddCourseModal() {
 
                 <FormField
                   control={form.control}
-                  name="totalPraticalHours"
+                  name="iPracticalDurationInHours"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormControl>

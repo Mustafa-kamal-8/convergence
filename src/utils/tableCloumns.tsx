@@ -36,44 +36,44 @@ export const tpTableColumns: ColumnDef<any, any>[] = [
     header: "TP Id",
   },
   {
-    accessorKey: "tpName",
+    accessorKey: "vsTpName",
     header: "Tp Name",
   },
   {
-    accessorKey: "tpSpocEmail",
+    accessorKey: "vsSpocEmail",
     header: "SPOC Email",
   },
   {
-    accessorKey: "tpSpocMobile",
+    accessorKey: "iSpocContactNum",
     header: "SPOC Mobile",
   },
   {
-    accessorKey: "tpSpocName",
+    accessorKey: "vsSpocName",
     header: "SPOC Name",
   },
   {
-    accessorKey: "tpSmartId",
+    accessorKey: "vsTpCode",
     header: "Smart ID",
   },
   {
-    accessorKey: "tpState",
+    accessorKey: "vsState",
     header: "State",
   },
   {
-    accessorKey: "tpDistrict",
+    accessorKey: "vsDistrict",
     header: "District",
   },
   {
-    accessorKey: "tpBlock",
+    accessorKey: "vsBlock",
     header: "Block",
   },
   {
-    accessorKey: "tpVillage",
+    accessorKey: "vsVillage",
     header: "Village",
   },
 
   {
-    accessorKey: "tpAddress",
+    accessorKey: "vsAddress",
     header: "Tp Address",
   },
 ];
@@ -187,37 +187,37 @@ export const courseTableColumns: ColumnDef<any, any>[] = [
     },
   },
   {
-    accessorKey: "dateValidFrom",
+    accessorKey: "dtFromDate",
     header: "Date Valid From",
     cell: ({ getValue }) => {
       return moment(getValue()).local().format("D/MM/YYYY");
     },
   },
   {
-    accessorKey: "dateValidUpto",
+    accessorKey: "dtToDate",
     header: "Date valid upto",
     cell: ({ getValue }) => {
       return moment(getValue()).local().format("D/MM/YYYY");
     },
   },
   {
-    accessorKey: "sectorName",
+    accessorKey: "vsSectorName",
     header: "Sector Name",
   },
   {
-    accessorKey: "qpnosCode",
+    accessorKey: "vsCourseCode",
     header: "QPNOS Code",
   },
   {
-    accessorKey: "totalTheoryHours",
+    accessorKey: "iTheoryDurationInHours",
     header: "Total Theory Hours",
   },
   {
-    accessorKey: "totalPraticalHours",
+    accessorKey: "iPracticalDurationInHours",
     header: "Total Pratical Hours",
   },
   {
-    accessorKey: "jobRoleName",
+    accessorKey: "vsCourseName",
     header: "Job Role",
   },
 ];

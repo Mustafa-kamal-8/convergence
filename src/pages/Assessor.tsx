@@ -16,13 +16,16 @@ export default function Assessor() {
   const [loading, setLoading] = useState(false);
   const { key } = useModal();
 
+  const assessor = "assessor"
+
   useMemo(() => {
     const abortController = new AbortController();
     const getData = async (signal: AbortSignal) => {
       try {
         setLoading(true);
-        const { data: resData } = await API.get("/sheet/get/assessor", {
+        const { data: resData } = await API.post("/get-department", {
           signal,
+          queryType: assessor
         });
 
         if (resData.success) {

@@ -16,13 +16,16 @@ export default function Target() {
   const [loading, setLoading] = useState(false);
   const { key } = useModal();
 
+  const target = "target"
+
   useMemo(() => {
     const abortController = new AbortController();
     const getData = async (signal: AbortSignal) => {
       try {
         setLoading(true);
-        const { data: resData } = await API.get("/sheet/get/target", {
+        const { data: resData } = await API.post("/get-department", {
           signal,
+          queryType: target
         });
 
         if (resData.success) {
