@@ -536,41 +536,41 @@ export const batchTableColumns: ColumnDef<any, any>[] = [
     },
   },
   {
-    accessorKey: "batchId",
+    accessorKey: "batchID",
     header: "Batch Id",
   },
   {
-    accessorKey: "sdmsBatchId",
+    accessorKey: "SDMSid",
     header: "SDMS Batch Id",
   },
   {
-    accessorKey: "batchStartDate",
+    accessorKey: "dtStartDate",
     header: "Batch Start Date",
     cell: ({ getValue }) => {
       return moment(getValue()).local().format("D/MM/YYYY");
     },
   },
   {
-    accessorKey: "batchEndDate",
+    accessorKey: "dtEndDate",
     header: "Batch End Date",
     cell: ({ getValue }) => {
       return moment(getValue()).local().format("D/MM/YYYY");
     },
   },
   {
-    accessorKey: "sectorName",
+    accessorKey: "dtSectorName",
     header: "Sector Name",
   },
   {
-    accessorKey: "qpnosCode",
+    accessorKey: "QPNOS",
     header: "QPNOS Code",
   },
   {
-    accessorKey: "jobRoleName",
+    accessorKey: "dtJobRoleName",
     header: "Job Role Name",
   },
   {
-    accessorKey: "tpName",
+    accessorKey: "dtTpName",
     header: "TP Name",
   },
   {
@@ -578,7 +578,7 @@ export const batchTableColumns: ColumnDef<any, any>[] = [
     header: "TC Partner Code",
   },
   {
-    accessorKey: "trainerId",
+    accessorKey: "fklTrainerId",
     header: "Trainer Id",
   },
 ];

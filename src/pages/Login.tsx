@@ -38,13 +38,14 @@ const Login: React.FC = () => {
       if (data?.data?.token) {
         setCookie('Authorization', data?.data?.token, 7);
       }
+      localStorage.setItem("fklDepartmentId", data?.data?.departmentId);
       if (data?.data?.isDept === 1) {
         toast.success("Login successfully!")
-        navigate('/scheme')
+        navigate('/homepage')
       } else if (data?.data?.isDept === 0) {
         toast.success("Login successfully!")
         navigate('/admin');
-        localStorage.setItem("fklDepartmentId", data?.data?.departmentId);
+       
       }
       else {
         throw new Error('Authentication token not received');

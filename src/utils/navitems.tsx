@@ -8,6 +8,10 @@ interface NavItemType {
 
 export const navItems: NavItemType[] = [
   {
+    name: "Dashboard",
+    link: "/homepage",
+  },
+  {
     name: "Scheme",
     link: "/scheme",
   },
@@ -20,11 +24,11 @@ export const navItems: NavItemType[] = [
     link: "/course",
   },
   {
-    name: "TP",
+    name: "Training Partner",
     link: "/tp",
   },
   {
-    name: "TC",
+    name: "Training Center",
     link: "/tc",
   },
   {

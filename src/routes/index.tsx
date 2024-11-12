@@ -23,6 +23,7 @@ import Layout from "@/components/common/layout";
 import Protected from "@/components/protected";
 import LoginCreation from "@/pages/login-creation/LoginCreation";
 import LayoutSystemAdmin from "@/components/common/layout-system-admin";
+import HomePage from "@/pages/HomePage";
 
 export default function Routes() {
   return (
@@ -33,7 +34,7 @@ export default function Routes() {
 
           <Route path="/scheme" element={ <Scheme /> } />
           <Route path="/batch" element={ <Batch /> } />
-
+          <Route path="/homepage" element={ <HomePage /> } />
           <Route path="/target" element={ <Target /> } />
           <Route path="/course" element={ <Course /> } />
           <Route path="/tp" element={ <Tp /> } />

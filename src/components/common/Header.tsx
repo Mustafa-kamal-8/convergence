@@ -28,7 +28,7 @@ export default function Header() {
   };
 
   return (
-    <div className="sticky top-0 z-10 flex items-center justify-between p-4 bg-white border-b">
+    <div className="sticky top-0 z-5 flex items-center justify-between p-4 bg-white border-b">
       <h1> Assam Skill Development Mission</h1>
 
       <div>

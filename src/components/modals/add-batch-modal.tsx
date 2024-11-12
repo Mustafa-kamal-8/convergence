@@ -158,7 +158,7 @@ export default function AddBatchModal() {
               <div className="flex items-center gap-4">
                 <FormField
                   control={form.control}
-                  name="batchId"
+                  name="batchID"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
@@ -178,7 +178,7 @@ export default function AddBatchModal() {
 
                 <FormField
                   control={form.control}
-                  name="sdmsBatchId"
+                  name="SDMSid"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
@@ -200,7 +200,7 @@ export default function AddBatchModal() {
               <div className="flex items-center gap-4">
                 <FormField
                   control={form.control}
-                  name="batchStartDate"
+                  name="dtStartDate"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormControl>
@@ -223,7 +223,7 @@ export default function AddBatchModal() {
 
                 <FormField
                   control={form.control}
-                  name="batchEndDate"
+                  name="dtEndDate"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormControl>
@@ -246,7 +246,7 @@ export default function AddBatchModal() {
               <div className="flex items-center gap-4">
                 <FormField
                   control={form.control}
-                  name="sectorName"
+                  name="fklSectorId"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormControl>
@@ -269,7 +269,7 @@ export default function AddBatchModal() {
 
                 <FormField
                   control={form.control}
-                  name="qpnosCode"
+                  name="QPNOS"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormControl>
@@ -292,7 +292,7 @@ export default function AddBatchModal() {
 
                 <FormField
                   control={form.control}
-                  name="jobRoleName"
+                  name="fklCourseId"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormControl>
@@ -317,7 +317,7 @@ export default function AddBatchModal() {
               <div className="flex items-center gap-4">
                 <FormField
                   control={form.control}
-                  name="tpName"
+                  name="fklTcId"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormControl>
@@ -340,7 +340,7 @@ export default function AddBatchModal() {
 
                 <FormField
                   control={form.control}
-                  name="tcPartnerCode"
+                  name="fklTrainerId"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormControl>
@@ -363,7 +363,7 @@ export default function AddBatchModal() {
 
                 <FormField
                   control={form.control}
-                  name="trainerId"
+                  name="fklTrainerId"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormControl>

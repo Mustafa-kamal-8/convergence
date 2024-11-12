@@ -708,6 +708,8 @@ export default function AddProfileModal() {
                 />
               </div>
 
+              <div className="mt-7"></div>
+
               <div className="flex items-center gap-4">
                 <FormField
                   control={form.control}
@@ -938,6 +940,8 @@ export default function AddProfileModal() {
                 />
               </div>
 
+              <div className="mt-7"></div>
+
               <div className="flex items-center gap-4">
                 <FormField
                   control={form.control}
@@ -1167,6 +1171,8 @@ export default function AddProfileModal() {
                   )}
                 />
               </div>
+
+              <div className="mt-7"></div>
 
               <div className="flex items-center gap-4">
                 <FormField
