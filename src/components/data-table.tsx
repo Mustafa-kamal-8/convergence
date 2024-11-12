@@ -196,9 +196,8 @@ export default function DataTable({
                       <label htmlFor={ `toggle-${row.id}` } className="flex justify-center items-center cursor-pointer">
                         <div className="relative">
                           <input type="checkbox" id={ `toggle-${row.id}` }
-                            // checked={ row.original. }
                             checked={ row.original.bEnable }
-                            onChange={ (e) => handleToggleChange(row.original.pklDepartmentId, e.target.checked) }
+                            onChange={ (e) => { handleToggleChange(row.original.pklDepartmentId, e.target.checked) } }
                             className="sr-only" />
                           <div className="block bg-gray-600 w-14 h-7 rounded-full"></div>
                           <div className="dot absolute left-1 top-0.5 bg-white w-6 h-6 rounded-full transition"></div>

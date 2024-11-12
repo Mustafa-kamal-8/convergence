@@ -17,7 +17,7 @@ import { BACKEND_URL } from "@/lib/utils";
 export default function LoginCreation() {
   const [courseData, setCourseData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const { key } = useModal();
+  const { key, setKey } = useModal();
 
   const handleToggleChange = async (departmentId: string | number, status: number) => {
     try {
@@ -25,6 +25,7 @@ export default function LoginCreation() {
 
       if (data.success) {
         toast.success("Profile Submitted Successfully");
+        setKey();
       }
     } catch (error) {
       if (isAxiosError(error)) {
@@ -69,6 +70,7 @@ export default function LoginCreation() {
 
   return (
     <div className="h-full m-4 space-y-4">
+      <h2 className="text-2xl font-bold text-center">Department Login Creation</h2>
       <div className="p-4 bg-white relative flex items-center justify-between">
         <AddButton
           modalType="departmentLoginCreation"
